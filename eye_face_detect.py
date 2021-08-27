@@ -4,9 +4,9 @@ import cv2 as cv
 cap = cv.VideoCapture(0)
 #face_cascade = cv.CascadeClassifier('cv.data.haarcascades' + 'haarcascade_frontalface_default.xml')
 #eye_cascade = cv.CascadeClassifier('cv.data.haarcascades' + 'haarcascade_eye.xml')
-face_cascade = cv.CascadeClassifier('/home/dualta/miniconda3/share/opencv4/haarcascades/haarcascade_frontalface_default.xml')
-eye_cascade = cv.CascadeClassifier('/home/dualta/miniconda3/share/opencv4/haarcascades/haarcascade_eye.xml')
-prof_cascade = cv.CascadeClassifier('/home/dualta/miniconda3/share/opencv4/haarcascades/haarcascade_profileface.xml')
+face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
+eye_cascade = cv.CascadeClassifier('haarcascade_eye.xml')
+prof_cascade = cv.CascadeClassifier('haarcascade_profileface.xml')
 
 while True:
     ret, frame = cap.read()
@@ -36,6 +36,7 @@ while True:
         cv.putText(frame, 'eye', (ex, ey-5), cv.FONT_HERSHEY_SIMPLEX, 0.5, (180,120,120), 1)   
 
     #add in face profile detector
+    # interesting that profile detector only seems to work in one direction!
     profs = prof_cascade.detectMultiScale(grey, 1.3, 5)
     for (px, py, pw, ph) in profs:
         cv.rectangle(frame, (px, py), (px+pw,py+ph), (120, 235, 0), 2)
